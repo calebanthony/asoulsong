@@ -1,0 +1,7 @@
+** Footer Widget Area **
+* Add FB widget
+* Social icons in footer right above instagram feed
+
+** AFTER MERGE **
+* Only on 'about me' page, don't show text for 'meet krista' widget
+* use wpdiscuz plugin for comments
