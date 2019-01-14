@@ -1718,7 +1718,6 @@ WOOCOMMERCE STYLES (some need !important)
     .store-page .product .price {
       text-align: center; }
     .store-page .product a img {
-      max-height: 275px;
       object-fit: cover; }
   .store-page .cart button {
     background: #CFB372 !important; }
