@@ -65,6 +65,10 @@ style a page via class
 .logged-in {}                     /* if user is logged in */
 .paged {}                         /* paged items like search results or archives */
 	.paged-1 {}                     /* individual paged (i.e. body.paged-3) */
+img {
+    max-width: 100%;
+    height: auto;
+}
 
 /*********************
 LAYOUT & GRID STYLES
@@ -117,7 +121,7 @@ H1, H2, H3, H4, H5 STYLES
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 	text-rendering: optimizelegibility;
 	font-weight: 500;
-    font-family: $satisfy;
+    font-family: $fredericka;
 	/*
 	if you're going to use webfonts, be sure to check your weights
 	http://css-tricks.com/watch-your-font-weight/
@@ -161,16 +165,20 @@ HEADER STYLES
 *********************/
 
 .header {
-    background-image: url(/wp-content/themes/aSoulSong/library/images/bg.png);
-    background-repeat: no-repeat;
-    background-position: center top;
-    padding: 70px 0 0;
-
     #inner-header {
         text-align: center;
 
         img {
-            width: 100%;
+            width: auto;
+            max-width: 100%;
+            max-height: 15em;
+            padding-top: 1em;
+        }
+
+        #menu-main-menu {
+            .sub-menu {
+                display: none;
+            }
         }
     }
 }
@@ -194,6 +202,10 @@ easily write one group of styles for
 the navs on the site so our css is cleaner
 and more scalable.
 */
+
+.store-links {
+    text-align: center;
+}
 
 .nav {
 	border-bottom: 0;
@@ -273,11 +285,36 @@ POSTS & CONTENT STYLES
 	margin-top: 1.5em;
 }
 
+.post-excerpt {
+    margin-bottom: 4em;
+
+    .post-title {
+        text-align: center;
+        margin: 0;
+    }
+    .post-date {
+        text-align: center;
+        margin: 0;
+        font-size: 80%;
+    }
+}
+
+.categories {
+    display: flex;
+
+    img {
+        height: auto;
+        max-width: 100%;
+    }
+
+    & > * {
+        flex: 0 0 33%;
+        padding: 0.3em;
+    }
+}
+
 		.hentry {
 			background-color: $white;
-			border-radius: 3px;
-			margin-bottom: 1.5em;
-			border: 1px solid $border-color;
 
 			header {
 				border-bottom: 1px solid $light-gray;
@@ -292,11 +329,16 @@ POSTS & CONTENT STYLES
 			footer {
 				padding: 1.5em;
 				border-top: 1px solid $light-gray;
+                display: flex;
+                flex-wrap: wrap;
+
+                h2 {
+                    flex: 100%;
+                }
 
                 .related-posts {
-                    float: left;
+                    flex: 33%;
                     text-align: center;
-                    width: 33.2%;
                     margin-bottom: 4em;
 
                     a {
@@ -320,11 +362,16 @@ POSTS & CONTENT STYLES
 		.page-title,
 		.entry-title {
 			margin: 0;
+            text-align: center;
+            color: $secondary;
 		}
 
 		.single-title {}
 
-		.page-title {}
+        // Only applies to the category pages
+		.category .page-title {
+            padding-bottom: 1.5em;
+        }
 
 		.entry-title {}
 
@@ -485,7 +532,6 @@ POSTS & CONTENT STYLES
 			img {
 				max-width: 100%;
 				margin-bottom: 0;
-				width: 100%;
 			}
 
 			p.wp-caption-text {
@@ -537,6 +583,10 @@ PAGE NAVI STYLES
 	.pagination{
     text-align: center;
 
+    .screen-reader-text {
+        display: none;
+    }
+
     ul {
       display: inline-block;
       background-color: $white;
@@ -564,7 +614,7 @@ PAGE NAVI STYLES
       font-weight: normal;
       padding: 0.75em;
       min-width: 1em;
-      display: block;
+      display: inline-block;
       color: $blue;
 
       &:hover, &:focus {
@@ -603,58 +653,38 @@ PAGE NAVI STYLES
 /*********************
 HOME PAGE STYLES
 *********************/
-#main {
-    .post-excerpt {
+#homePage {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    .who-we-are {
+        font-size: 120%;
+    }
+    .interact {
+        display: flex;
+        flex-wrap: wrap;
+
+        & > * {
+            flex: 100%;
+        }
+    }
+    .community {
         text-align: center;
 
-        a {
-            text-decoration: none;
+        #mc_embed_signup_scroll {
+            .mc-field-group {
+                display: inline-block;
+            }
 
-            &:hover {
-                text-decoration: underline;
+            .clear {
+                display: inline-block;
             }
         }
 
-        .post-categories {
-            font-size: 80%;
-        }
-
-        .post-title {
-            margin-bottom: 0;
-        }
-
-        .post-date {
-            margin: 0;
-            font-size: 80%;
-            font-style: italic;
-        }
-
-        .post-image {
-            img {
-                width: auto;
-                height: 100%;
-                display: block;
-                margin: auto;
-            }
-        }
-
-        .post-excerpt {
-            text-align: left;
-
-            .excerpt-read-more {
-                display: block;
-                background: $link-color;
-                color: $gray;
-                width: 50%;
-                margin: auto;
-                text-align: center;
-                padding: 0.2em;
-
-                &:hover {
-                    background: $link-hover;
-                    text-decoration: none;
-                }
-            }
+        .fa {
+            padding-left: 0.5em;
+            padding-right: 0.5em;
         }
     }
 }
@@ -665,36 +695,36 @@ WOOCOMMERCE STYLES (some need !important)
 
 .store-page {
     /* Remove pieces of main store page */
-    .woocommerce-result-count {
-        display: none;
-    }
-    .woocommerce-ordering {
-        display: none;
+	.woocommerce-result-count,
+	.woocommerce-ordering,
+	.page-title,
+	.star-rating,
+	.add_to_cart_button,
+	.product_meta {
+        display: none !important;
     }
 
     /* Style the main store page */
+    .products {
+        display: flex;
+        flex-flow: wrap;
+    }
     .product {
+        flex: 0 0 33%;
+        margin: 0 !important;
+        padding: 0.3em !important;
+
         h3 {
             text-align: center;
             font-size: 150% !important;
             padding: 0 !important;
         }
-        .star-rating {
-            margin: auto;
-        }
         .price {
             text-align: center;
-        }
-        .add_to_cart_button {
-            background: $link-color;
-            color: $white;
-            display: block;
-            text-align: center;
-
-            &:hover {
-                background: $link-hover;
-            }
-        }
+		}
+		a img {
+			object-fit: cover;
+		}
     }
 
     /* Style an individual product page */
@@ -919,6 +949,9 @@ COMMENT STYLES
 		font-size: 0.9em;
 	}
 
+#wc-comment-header {
+    font-size: 1.75em;
+}
 
 
 /******************************************************************
@@ -1003,6 +1036,7 @@ SIDEBARS & ASIDES
     #mc_embed_signup {
 
         #mc_embed_signup_scroll {
+
             h2 {
                 text-align: center;
             }
@@ -1021,11 +1055,36 @@ SIDEBARS & ASIDES
         }
     }
 
-    .archives-4 {
+    #archives-5 {
         h4 {
             font-size: 1.75em;
             text-align: center;
             font-weight: 500;
+            margin-top: 0;
+        }
+    }
+
+    #fbw_id-2 {
+        h4 {
+            font-size: 1.75em;
+            text-align: center;
+            font-weight: 500;
+            margin-top: 0;
+        }
+    }
+
+    .rpwe_widget {
+        h4 {
+            font-size: 1.75em;
+            text-align: center;
+            font-weight: 500;
+            margin-top: 0;
+        }
+
+        .rpwe-title a {
+            font-size: 1.4em;
+            text-align: center;
+            color: $black;
         }
     }
 }
@@ -1070,11 +1129,18 @@ FOOTER STYLES
 
 .footer {
 	clear: both;
-	background-color: $black;
-	color: $light-gray;
 }
 
 #upper-footer {
+    #mc_embed_signup_scroll {
+        .mc-field-group {
+            display: inline-block;
+        }
+
+        .clear {
+            display: inline-block;
+        }
+    }
     .lower-footer-widget {
         padding: 0;
     }

@@ -14,18 +14,20 @@ be seen on the Desktop.
 }
 
 /*********************
-HOME PAGE STYLES
+ARCHIVE PAGE STYLES
 *********************/
 
-#excerpt-area {
+.archive {
 
     .post-excerpt {
         float: left;
         padding: 0.25em;
-        width: 49.9%;
 
-        &:nth-child(odd) {
-            clear: both;
+        img {
+            max-width: 35%;
+            height: auto;
+            float: left;
+            padding: 1em;
         }
 
         h1 {
